@@ -1,0 +1,21 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/redis",
+    "body": {
+      "operation": "sadd",
+      "params": [
+        "Products : 1",
+        "912340",
+        "956780"
+      ]
+    }
+  },
+  "http-response": {
+    "status": 200,
+    "body": {
+      "type": "long",
+      "value": "2"
+    }
+  }
+}

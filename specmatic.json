@@ -1,0 +1,13 @@
+{
+  "auth": {
+    "bearer-file": "bearer.txt"
+  },
+  "sources": [
+    {
+      "provider": "git",
+      "test": [
+        "test-contract.yaml"
+      ]
+    }
+  ]
+}

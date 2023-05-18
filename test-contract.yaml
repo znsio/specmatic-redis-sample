@@ -1,0 +1,73 @@
+openapi: 3.0.1
+info:
+  title: Get Store Details
+  version: "1"
+paths:
+  /store/description/{id}:
+    get:
+      summary: Store Description
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            GET_STORE_DESCRIPTION:
+              value: 1
+      responses:
+        "200":
+          description: Get Store Description
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                GET_STORE_DESCRIPTION:
+                  value: "This is the store description"
+  /store/addProducts/{id}:
+    get:
+      summary: Add Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            ADD_PRODUCTS_TO_STORE:
+              value: 1
+      responses:
+        "200":
+          description: Add Products
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                ADD_PRODUCTS_TO_STORE:
+                  value: "2"
+  /store/getProducts/{id}:
+    get:
+      summary: Store Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            GET_STORE_PRODUCTS:
+              value: 1
+      responses:
+        "200":
+          description: Get Store Products
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                GET_STORE_PRODUCTS:
+                  value: ["ABC Brand Powder", "XYZ Brand Soap"]
