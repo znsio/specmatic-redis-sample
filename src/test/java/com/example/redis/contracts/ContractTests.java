@@ -4,16 +4,13 @@ import com.example.redis.DemoApplication;
 import in.specmatic.redis.mock.RedisMock;
 import in.specmatic.stub.ContractStub;
 import in.specmatic.test.SpecmaticJUnitSupport;
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 import static in.specmatic.stub.API.createStub;
 
@@ -34,24 +31,20 @@ public class ContractTests extends SpecmaticJUnitSupport {
     }
 
     @BeforeEach
-    public void before() throws Exception {
+    public void before() {
         startRedisServer();
     }
 
-    private void startRedisServer() throws IOException {
+    private void startRedisServer() {
         redisMock = new RedisMock("localhost", 6379);
         redisMock.start();
-        setRedisExpectations();
+        setUpRedisMock();
     }
 
-    private void setRedisExpectations() throws IOException {
-        File directoryPath = new File("src/test/resources/redis-expectations");
-        File[] filesList = directoryPath.listFiles();
-        assert filesList != null;
-        Arrays.sort(filesList);
-        for (File file : filesList) {
-            redisMock.setExpectation(FileUtils.readFileToString(new File(file.getPath())));
-        }
+    private void setUpRedisMock() {
+        redisMock.when("get").with(new String[]{"Description : 1"}).thenReturnString("This is the store description");
+        redisMock.when("sadd").with(new String[]{"Products : 1","912340","956780"}).thenReturnLong(2);
+        redisMock.when("zrevrange").with(new String[]{"Products : 1","0","(string)"}).thenReturnArray(new String[]{"ABC Brand Powder","XYZ Brand Soap"});
     }
 
     @AfterAll
