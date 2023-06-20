@@ -1,13 +1,14 @@
-package com.example.redis;
+package in.specmatic.redis.example;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		run(DemoApplication.class, args);
 	}
 
 }

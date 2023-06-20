@@ -1,4 +1,4 @@
-package com.example.redis;
+package in.specmatic.redis.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

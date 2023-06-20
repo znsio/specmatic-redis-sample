@@ -1,4 +1,4 @@
-package com.example.redis;
+package in.specmatic.redis.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import static java.lang.System.currentTimeMillis;
+import static java.util.Objects.requireNonNull;
 
 @Service
 public class CacheService {
@@ -32,6 +34,6 @@ public class CacheService {
 
     @Cacheable("myCache")
     public List<String> getStoreProducts(String id) {
-        return new ArrayList<>(Objects.requireNonNull(redisTemplate.opsForZSet().reverseRange("Products : " + id, 0, System.currentTimeMillis())));
+        return new ArrayList<>(requireNonNull(redisTemplate.opsForZSet().reverseRange("Products : " + id, 0, currentTimeMillis())));
     }
 }
