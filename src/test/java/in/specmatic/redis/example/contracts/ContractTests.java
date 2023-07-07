@@ -34,19 +34,28 @@ public class ContractTests extends SpecmaticJUnitSupport {
 
     @BeforeEach
     public void before() {
-        startRedisServer();
+        startRedisMock();
     }
 
-    private void startRedisServer() {
+    private void startRedisMock() {
         redisMock = new RedisMock(LOCALHOST, REDIS_PORT);
         redisMock.start();
         setUpRedisMock();
     }
 
     private void setUpRedisMock() {
-        redisMock.when("get").with(new String[]{"Description : 1"}).thenReturnString("This is the store description");
-        redisMock.when("sadd").with(new String[]{"Products : 1","912340","956780"}).thenReturnLong(2);
-        redisMock.when("zrevrange").with(new String[]{"Products : 1","0","(string)"}).thenReturnArray(new String[]{"ABC Brand Powder","XYZ Brand Soap"});
+        redisMock
+                .when("get")
+                .with(new String[]{"Description : 1"})
+                .thenReturnString("This is the store description");
+        redisMock
+                .when("sadd")
+                .with(new String[]{"Products : 1","912340","956780"})
+                .thenReturnLong(2);
+        redisMock
+                .when("zrevrange")
+                .with(new String[]{"Products : 1","0","(string)"})
+                .thenReturnArray(new String[]{"ABC Brand Powder","XYZ Brand Soap"});
     }
 
     @AfterAll
