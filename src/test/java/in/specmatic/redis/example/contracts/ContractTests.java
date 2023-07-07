@@ -28,22 +28,18 @@ public class ContractTests extends SpecmaticJUnitSupport {
         System.setProperty("port", APP_PORT);
         System.setProperty("endpointsAPI", "http://localhost:8080/actuator/mappings");
         System.setProperty("spring.profiles.active", "contract-tests");
+        startRedisMock();
         stub = createStub(LOCALHOST, SPECMATIC_STUB_PORT);
         context = run(DemoApplication.class);
     }
 
-    @BeforeEach
-    public void before() {
-        startRedisMock();
-    }
-
-    private void startRedisMock() {
+    private static void startRedisMock() {
         redisMock = new RedisMock(LOCALHOST, REDIS_PORT);
         redisMock.start();
         setUpRedisMock();
     }
 
-    private void setUpRedisMock() {
+    private static void setUpRedisMock() {
         redisMock
                 .when("get")
                 .with(new String[]{"Description : 1"})
