@@ -41,15 +41,15 @@ public class ContractTests extends SpecmaticJUnitSupport {
     private static void setUpRedisMock() {
         redisStub
                 .when("get")
-                .with(new String[]{"Description : 1"})
-                .thenReturnString("This is the store description");
+                .with(new String[]{"Description-1"})
+                .thenReturnString("Grocery store with free home delivery!");
         redisStub
                 .when("sadd")
-                .with(new String[]{"Products : 1","912340","956780"})
+                .with(new String[]{"Products-1","912340","956780"})
                 .thenReturnLong(2);
         redisStub
                 .when("zrevrange")
-                .with(new String[]{"Products : 1","0","(string)"})
+                .with(new String[]{"Products-1","0","(string)"})
                 .thenReturnArray(new String[]{"ABC Brand Powder","XYZ Brand Soap"});
     }
 

@@ -23,17 +23,17 @@ public class CacheService {
 
     @Cacheable("myCache")
     public String getStoreDescription(String id) {
-        return redisTemplate.opsForValue().get("Description : " + id);
+        return redisTemplate.opsForValue().get("Description-" + id);
     }
 
     @Cacheable("myCache")
     public Long addProductsToStore(String id) {
         String[] productsToAdd = {"912340", "956780"};
-        return redisTemplate.opsForSet().add("Products : " + id, productsToAdd[0], productsToAdd[1]);
+        return redisTemplate.opsForSet().add("Products-" + id, productsToAdd[0], productsToAdd[1]);
     }
 
     @Cacheable("myCache")
     public List<String> getStoreProducts(String id) {
-        return new ArrayList<>(requireNonNull(redisTemplate.opsForZSet().reverseRange("Products : " + id, 0, currentTimeMillis())));
+        return new ArrayList<>(requireNonNull(redisTemplate.opsForZSet().reverseRange("Products-" + id, 0, currentTimeMillis())));
     }
 }
