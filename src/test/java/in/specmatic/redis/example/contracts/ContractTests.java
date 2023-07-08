@@ -1,12 +1,11 @@
 package in.specmatic.redis.example.contracts;
 
 import in.specmatic.redis.example.DemoApplication;
-import in.specmatic.redis.mock.RedisMock;
+import in.specmatic.redis.stub.RedisStub;
 import in.specmatic.stub.ContractStub;
 import in.specmatic.test.SpecmaticJUnitSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
@@ -20,7 +19,7 @@ public class ContractTests extends SpecmaticJUnitSupport {
     private static final String APP_PORT = "8080";
     private static final int REDIS_PORT = 6379;
     private static ContractStub stub;
-    private static RedisMock redisMock;
+    private static RedisStub redisStub;
     private static ConfigurableApplicationContext context;
     @BeforeAll
     public static void setUp() {
@@ -34,21 +33,21 @@ public class ContractTests extends SpecmaticJUnitSupport {
     }
 
     private static void startRedisMock() {
-        redisMock = new RedisMock(LOCALHOST, REDIS_PORT);
-        redisMock.start();
+        redisStub = new RedisStub(LOCALHOST, REDIS_PORT);
+        redisStub.start();
         setUpRedisMock();
     }
 
     private static void setUpRedisMock() {
-        redisMock
+        redisStub
                 .when("get")
                 .with(new String[]{"Description : 1"})
                 .thenReturnString("This is the store description");
-        redisMock
+        redisStub
                 .when("sadd")
                 .with(new String[]{"Products : 1","912340","956780"})
                 .thenReturnLong(2);
-        redisMock
+        redisStub
                 .when("zrevrange")
                 .with(new String[]{"Products : 1","0","(string)"})
                 .thenReturnArray(new String[]{"ABC Brand Powder","XYZ Brand Soap"});
@@ -59,8 +58,8 @@ public class ContractTests extends SpecmaticJUnitSupport {
         if (stub != null) {
             stub.close();
         }
-        if (redisMock != null) {
-            redisMock.stop();
+        if (redisStub != null) {
+            redisStub.stop();
         }
         if(context != null){
             context.stop();

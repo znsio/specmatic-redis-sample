@@ -50,7 +50,7 @@
 			<groupId>in.specmatic</groupId>
 			<artifactId>specmatic-redis</artifactId>
 			<scope>test</scope>
-			<version>0.6.0</version>
+			<version>0.7.0</version>
 		</dependency>
 
 		<dependency>
