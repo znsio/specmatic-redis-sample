@@ -34,10 +34,10 @@ public class ContractTests extends SpecmaticJUnitSupport {
     private static void startRedisStub() {
         redisStub = new RedisStub(LOCALHOST, REDIS_PORT);
         redisStub.start();
-        setUpRedisStub();
+        setUpRedisExpectations();
     }
 
-    private static void setUpRedisStub() {
+    private static void setUpRedisExpectations() {
         redisStub
                 .when("get")
                 .with(new String[]{"Description-1"})
