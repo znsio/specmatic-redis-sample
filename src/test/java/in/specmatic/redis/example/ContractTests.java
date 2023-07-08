@@ -1,6 +1,5 @@
 package in.specmatic.redis.example;
 
-import in.specmatic.redis.example.DemoApplication;
 import in.specmatic.redis.stub.RedisStub;
 import in.specmatic.stub.ContractStub;
 import in.specmatic.test.SpecmaticJUnitSupport;
@@ -27,18 +26,18 @@ public class ContractTests extends SpecmaticJUnitSupport {
         System.setProperty("port", APP_PORT);
         System.setProperty("endpointsAPI", "http://localhost:8080/actuator/mappings");
         System.setProperty("spring.profiles.active", "contract-tests");
-        startRedisMock();
+        startRedisStub();
         stub = createStub(LOCALHOST, SPECMATIC_STUB_PORT);
         context = run(DemoApplication.class);
     }
 
-    private static void startRedisMock() {
+    private static void startRedisStub() {
         redisStub = new RedisStub(LOCALHOST, REDIS_PORT);
         redisStub.start();
-        setUpRedisMock();
+        setUpRedisStub();
     }
 
-    private static void setUpRedisMock() {
+    private static void setUpRedisStub() {
         redisStub
                 .when("get")
                 .with(new String[]{"Description-1"})
