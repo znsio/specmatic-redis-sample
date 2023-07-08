@@ -10,25 +10,25 @@ import java.util.List;
 @RestController
 public class CacheController {
 
-    private final CacheService cacheService;
+    private final StoreService storeService;
 
     @Autowired
-    public CacheController(CacheService cacheService) {
-        this.cacheService = cacheService;
+    public CacheController(StoreService storeService) {
+        this.storeService = storeService;
     }
 
     @GetMapping("/store/description/{id}")
     public String getStoreDescription(@PathVariable String id) {
-        return cacheService.getStoreDescription(id);
+        return storeService.getStoreDescription(id);
     }
 
     @GetMapping("/store/addProducts/{id}")
     public Long addProductsToStore(@PathVariable String id) {
-        return cacheService.addProductsToStore(id);
+        return storeService.addProductsToStore(id);
     }
 
     @GetMapping("/store/getProducts/{id}")
     public List<String> getProducts(@PathVariable String id) {
-        return cacheService.getStoreProducts(id);
+        return storeService.getStoreProducts(id);
     }
 }

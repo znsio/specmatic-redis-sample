@@ -1,4 +1,4 @@
-package in.specmatic.redis.example.contracts;
+package in.specmatic.redis.example;
 
 import in.specmatic.redis.example.DemoApplication;
 import in.specmatic.redis.stub.RedisStub;

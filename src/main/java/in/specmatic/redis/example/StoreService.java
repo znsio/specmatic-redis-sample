@@ -12,12 +12,12 @@ import static java.lang.System.currentTimeMillis;
 import static java.util.Objects.requireNonNull;
 
 @Service
-public class CacheService {
+public class StoreService {
 
     private final RedisTemplate<String, String> redisTemplate;
 
     @Autowired
-    public CacheService(RedisTemplate<String, String> redisTemplate) {
+    public StoreService(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
