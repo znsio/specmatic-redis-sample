@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
-  title: Get Store Details
+  title: Online Store and Product Details
   version: "1"
 paths:
   /stores/{id}/description:
     get:
-      summary: Store Description
+      summary: Get Store Description
       parameters:
         - name: id
           in: path
@@ -17,14 +17,14 @@ paths:
               value: 1
       responses:
         "200":
-          description: Get Store Description
+          description: Store Description
           content:
             text/plain:
               schema:
                 type: string
               examples:
                 GET_STORE_DESCRIPTION:
-                  value: "This is the store description"
+                  value: "New Apple Store also allows to order groceries online"
   /stores/{id}/products:
     post:
       summary: Add Products to a given Store
@@ -78,7 +78,7 @@ paths:
               value: 2
       responses:
         "200":
-          description: Get Store Products
+          description: List of matching products belonging to the store
           content:
             text/plain:
               schema:

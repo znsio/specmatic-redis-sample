@@ -6,7 +6,7 @@
     {
       "provider": "git",
       "test": [
-        "test-contract.yaml"
+        "online-store-v1.yaml"
       ]
     }
   ]
