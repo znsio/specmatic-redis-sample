@@ -3,7 +3,7 @@ info:
   title: Get Store Details
   version: "1"
 paths:
-  /store/description/{id}:
+  /stores/{id}/description:
     get:
       summary: Store Description
       parameters:
@@ -25,40 +25,57 @@ paths:
               examples:
                 GET_STORE_DESCRIPTION:
                   value: "This is the store description"
-  /store/addProducts/{id}:
-    get:
-      summary: Add Products
+  /stores/{id}/products:
+    post:
+      summary: Add Products to a given Store
       parameters:
         - name: id
           in: path
           required: true
+          description: Store Id
           schema:
             type: string
           examples:
             ADD_PRODUCTS_TO_STORE:
               value: 1
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+            examples:
+              ADD_PRODUCTS_TO_STORE:
+                value: "iPhone 12"
       responses:
-        "200":
+        "201":
           description: Add Products
           content:
             text/plain:
               schema:
-                type: string
+                type: number
               examples:
                 ADD_PRODUCTS_TO_STORE:
-                  value: "2"
-  /store/getProducts/{id}:
+                  value: 2
     get:
-      summary: Store Products
+      summary: Find matching products in given store
       parameters:
         - name: id
           in: path
           required: true
+          description: Store Id
+          schema:
+            type: number
+          examples:
+            FIND_PRODUCTS:
+              value: 1
+        - name: key
+          in: query
+          required: false
           schema:
             type: string
           examples:
-            GET_STORE_PRODUCTS:
-              value: 1
+            FIND_PRODUCTS:
+              value: 2
       responses:
         "200":
           description: Get Store Products
@@ -69,5 +86,5 @@ paths:
                 items:
                   type: string
               examples:
-                GET_STORE_PRODUCTS:
-                  value: ["ABC Brand Powder", "XYZ Brand Soap"]
+                FIND_PRODUCTS:
+                  value: ["Powder", "Soap"]

@@ -27,13 +27,17 @@ public class StoreService {
     }
 
     @Cacheable("myCache")
-    public Long addProductsToStore(String id) {
-        String[] productsToAdd = {"912340", "956780"};
-        return redisTemplate.opsForSet().add("Products-" + id, productsToAdd[0], productsToAdd[1]);
+    public Long addProductsToStore(String productName, String storeId) {
+        return redisTemplate.opsForList().rightPush("Products-" + storeId, productName);
     }
 
     @Cacheable("myCache")
-    public List<String> getStoreProducts(String id) {
-        return new ArrayList<>(requireNonNull(redisTemplate.opsForZSet().reverseRange("Products-" + id, 0, currentTimeMillis())));
+    public List<String> findMatchingProducts(Long storeId, String key) {
+        return new ArrayList<>(requireNonNull(redisTemplate.opsForZSet().reverseRange("Stores-" + storeId + "-Products-" + key, 0, currentTimeMillis())));
+    }
+
+    @Cacheable("myCache")
+    public String getProductDescription(String storeId, String productId) {
+        return redisTemplate.opsForValue().get("Stores-" + storeId + "-Description-" + productId);
     }
 }

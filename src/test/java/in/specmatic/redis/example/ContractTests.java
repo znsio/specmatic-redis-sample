@@ -43,13 +43,13 @@ public class ContractTests extends SpecmaticJUnitSupport {
                 .with(new String[]{"Description-1"})
                 .thenReturnString("Grocery store with free home delivery!");
         redisStub
-                .when("sadd")
-                .with(new String[]{"Products-1","912340","956780"})
+                .when("rpush")
+                .with(new String[]{"Products-1","iPhone 12"})
                 .thenReturnLong(2);
         redisStub
                 .when("zrevrange")
-                .with(new String[]{"Products-1","0","(string)"})
-                .thenReturnArray(new String[]{"ABC Brand Powder","XYZ Brand Soap"});
+                .with(new String[]{"Stores-1-Products-2","0","(string)"})
+                .thenReturnArray(new String[]{"Powder","Soap"});
     }
 
     @AfterAll
