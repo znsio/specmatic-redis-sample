@@ -1,12 +1,10 @@
 {
-  "auth": {
-    "bearer-file": "bearer.txt"
-  },
   "sources": [
     {
       "provider": "git",
+      "repository": "https://github.com/znsio/specmatic-order-contracts.git",
       "test": [
-        "online-store-v1.yaml"
+        "in/specmatic/examples/store/online_store_v1.yaml"
       ]
     }
   ]
