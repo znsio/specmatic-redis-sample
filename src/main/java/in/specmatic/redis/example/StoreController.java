@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class CacheController {
+public class StoreController {
 
     private final StoreService storeService;
 
     @Autowired
-    public CacheController(StoreService storeService) {
+    public StoreController(StoreService storeService) {
         this.storeService = storeService;
     }
 

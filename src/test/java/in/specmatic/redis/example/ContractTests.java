@@ -28,7 +28,7 @@ public class ContractTests extends SpecmaticJUnitSupport {
         System.setProperty("spring.profiles.active", "contract-tests");
         startRedisStub();
         stub = createStub(LOCALHOST, SPECMATIC_STUB_PORT);
-        context = run(DemoApplication.class);
+        context = run(RedisStubDemoApp.class);
     }
 
     private static void startRedisStub() {

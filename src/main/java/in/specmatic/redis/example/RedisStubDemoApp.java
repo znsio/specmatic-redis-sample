@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
-public class DemoApplication {
+public class RedisStubDemoApp {
 
 	public static void main(String[] args) {
-		run(DemoApplication.class, args);
+		run(RedisStubDemoApp.class, args);
 	}
 
 }
