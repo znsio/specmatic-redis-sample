@@ -16,7 +16,7 @@ public class ContractTests extends SpecmaticJUnitSupport {
     private static final String LOCALHOST = "localhost";
     private static final int SPECMATIC_STUB_PORT = 9000;
     private static final String APP_PORT = "8080";
-    private static final int REDIS_PORT = 6379;
+    private static final int REDIS_PORT = 8081;
     private static ContractStub stub;
     private static RedisStub redisStub;
     private static ConfigurableApplicationContext context;
