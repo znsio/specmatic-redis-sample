@@ -1,4 +1,4 @@
-package in.specmatic.redis.example;
+package io.specmatic.redis.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

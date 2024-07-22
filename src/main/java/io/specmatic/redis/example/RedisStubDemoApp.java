@@ -1,4 +1,4 @@
-package in.specmatic.redis.example;
+package io.specmatic.redis.example;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

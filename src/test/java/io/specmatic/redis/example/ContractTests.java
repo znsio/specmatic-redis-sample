@@ -1,15 +1,15 @@
-package in.specmatic.redis.example;
+package io.specmatic.redis.example;
 
-import in.specmatic.redis.stub.RedisStub;
-import in.specmatic.stub.ContractStub;
-import in.specmatic.test.SpecmaticJUnitSupport;
+import io.specmatic.redis.stub.RedisStub;
+import io.specmatic.stub.ContractStub;
+import io.specmatic.test.SpecmaticJUnitSupport;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 
-import static in.specmatic.stub.API.createStub;
+import static io.specmatic.stub.API.createStub;
 import static org.springframework.boot.SpringApplication.run;
 
 public class ContractTests extends SpecmaticJUnitSupport {
