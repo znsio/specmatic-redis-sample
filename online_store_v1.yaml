@@ -1,0 +1,137 @@
+openapi: 3.0.1
+info:
+  title: Online Store and Product Details
+  version: "1"
+paths:
+  /stores/{id}/description:
+    get:
+      summary: Get Store Description
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            GET_STORE_DESCRIPTION_1:
+              value: 1
+            GET_STORE_DESCRIPTION_2:
+              value: 1
+            GET_STORE_DESCRIPTION_3:
+              value: 1
+            GET_STORE_DESCRIPTION_4:
+              value: 1
+            GET_STORE_DESCRIPTION_5:
+              value: 1
+            GET_STORE_DESCRIPTION_6:
+              value: 1
+            GET_STORE_DESCRIPTION_7:
+              value: 1
+            GET_STORE_DESCRIPTION_8:
+              value: 1
+            GET_STORE_DESCRIPTION_9:
+              value: 1
+            GET_STORE_DESCRIPTION_10:
+              value: 1
+            GET_STORE_DESCRIPTION_11:
+              value: 1
+            GET_STORE_DESCRIPTION_12:
+              value: 1
+            GET_STORE_DESCRIPTION_13:
+              value: 1
+      responses:
+        "200":
+          description: Store Description
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                GET_STORE_DESCRIPTION_1:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_2:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_3:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_4:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_5:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_6:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_7:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_8:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_9:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_10:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_11:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_12:
+                  value: "New Apple Store also allows to order groceries online"
+                GET_STORE_DESCRIPTION_13:
+  /stores/{id}/products:
+    post:
+      summary: Add Products to a given Store
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Store Id
+          schema:
+            type: string
+          examples:
+            ADD_PRODUCTS_TO_STORE:
+              value: 1
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+            examples:
+              ADD_PRODUCTS_TO_STORE:
+                value: "iPhone 12"
+      responses:
+        "201":
+          description: Add Products
+          content:
+            application/json:
+              schema:
+                type: number
+              examples:
+                ADD_PRODUCTS_TO_STORE:
+                  value: 2
+    get:
+      summary: Find matching products in given store
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Store Id
+          schema:
+            type: number
+          examples:
+            FIND_PRODUCTS:
+              value: 1
+        - name: key
+          in: query
+          required: false
+          schema:
+            type: string
+          examples:
+            FIND_PRODUCTS:
+              value: 2
+      responses:
+        "200":
+          description: List of matching products belonging to the store
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                FIND_PRODUCTS:
+                  value: ["Powder", "Soap"]
