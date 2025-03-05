@@ -32,8 +32,12 @@ build/
 ### VS Code ###
 .vscode/
 
-mvnw
-mvnw.cmd
-.mvn
-
+### Eclipse ###
 .specmatic
+
+### Gradle ###
+.gradle/*
+**/build/*
+
+### Jenv ###
+.java-version

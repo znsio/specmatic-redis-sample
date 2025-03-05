@@ -2,7 +2,7 @@ package io.specmatic.redis.example;
 
 import io.specmatic.redis.stub.RedisStub;
 import io.specmatic.stub.ContractStub;
-import io.specmatic.test.SpecmaticJUnitSupport;
+import io.specmatic.test.SpecmaticContractTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import static io.specmatic.stub.API.createStub;
 import static org.springframework.boot.SpringApplication.run;
 
-public class ContractTests extends SpecmaticJUnitSupport {
+public class ContractTests implements SpecmaticContractTest {
     private static final String LOCALHOST = "localhost";
     private static final int SPECMATIC_STUB_PORT = 9000;
     private static final String APP_PORT = "8080";
@@ -20,6 +20,7 @@ public class ContractTests extends SpecmaticJUnitSupport {
     private static ContractStub stub;
     private static RedisStub redisStub;
     private static ConfigurableApplicationContext context;
+
     @BeforeAll
     public static void setUp() {
         System.setProperty("host", LOCALHOST);
@@ -29,6 +30,19 @@ public class ContractTests extends SpecmaticJUnitSupport {
         startRedisStub();
         stub = createStub(LOCALHOST, SPECMATIC_STUB_PORT);
         context = run(RedisStubDemoApp.class);
+    }
+
+    @AfterAll
+    public static void tearDown() throws IOException {
+        if (stub != null) {
+            stub.close();
+        }
+        if (redisStub != null) {
+            redisStub.stop();
+        }
+        if(context != null){
+            context.stop();
+        }
     }
 
     private static void startRedisStub() {
@@ -52,16 +66,4 @@ public class ContractTests extends SpecmaticJUnitSupport {
                 .thenReturnArray(new String[]{"Powder","Soap"});
     }
 
-    @AfterAll
-    public static void tearDown() throws IOException {
-        if (stub != null) {
-            stub.close();
-        }
-        if (redisStub != null) {
-            redisStub.stop();
-        }
-        if(context != null){
-            context.stop();
-        }
-    }
 }
