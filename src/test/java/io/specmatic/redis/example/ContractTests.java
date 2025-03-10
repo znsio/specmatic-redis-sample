@@ -5,13 +5,13 @@ import io.specmatic.stub.ContractStub;
 import io.specmatic.test.SpecmaticContractTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
 import static io.specmatic.stub.API.createStub;
-import static org.springframework.boot.SpringApplication.run;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class ContractTests implements SpecmaticContractTest {
     private static final String LOCALHOST = "localhost";
     private static final int SPECMATIC_STUB_PORT = 9000;
@@ -19,7 +19,6 @@ public class ContractTests implements SpecmaticContractTest {
     private static final int REDIS_PORT = 8081;
     private static ContractStub stub;
     private static RedisStub redisStub;
-    private static ConfigurableApplicationContext context;
 
     @BeforeAll
     public static void setUp() {
@@ -29,7 +28,6 @@ public class ContractTests implements SpecmaticContractTest {
         System.setProperty("spring.profiles.active", "contract-tests");
         startRedisStub();
         stub = createStub(LOCALHOST, SPECMATIC_STUB_PORT);
-        context = run(RedisStubDemoApp.class);
     }
 
     @AfterAll
@@ -39,9 +37,6 @@ public class ContractTests implements SpecmaticContractTest {
         }
         if (redisStub != null) {
             redisStub.stop();
-        }
-        if(context != null){
-            context.stop();
         }
     }
 
@@ -58,12 +53,12 @@ public class ContractTests implements SpecmaticContractTest {
                 .thenReturnString("Grocery store with free home delivery!");
         redisStub
                 .when("rpush")
-                .with(new String[]{"Products-1","iPhone 12"})
+                .with(new String[]{"Products-1", "iPhone 12"})
                 .thenReturnLong(2);
         redisStub
                 .when("zrevrange")
-                .with(new String[]{"Stores-1-Products-2","0","(string)"})
-                .thenReturnArray(new String[]{"Powder","Soap"});
+                .with(new String[]{"Stores-1-Products-2", "0", "(string)"})
+                .thenReturnArray(new String[]{"Powder", "Soap"});
     }
 
 }
