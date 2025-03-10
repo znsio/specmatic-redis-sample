@@ -18,7 +18,7 @@ dependencies {
     api libs.org.springframework.boot.spring.boot.starter.actuator
     testImplementation libs.org.springframework.boot.spring.boot.starter.test
     testImplementation "io.specmatic:junit5-support:2.7.2"
-    testImplementation "io.specmatic.redis:specmatic-redis-original:0.9.3-SNAPSHOT"
+    testImplementation "io.specmatic.redis:specmatic-redis-obfuscated-original:0.9.3-SNAPSHOT"
 }
 
 group = 'io.specmatic'
