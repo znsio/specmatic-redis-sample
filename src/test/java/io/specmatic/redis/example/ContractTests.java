@@ -1,5 +1,6 @@
 package io.specmatic.redis.example;
 
+import io.specmatic.redis.VersionInfo;
 import io.specmatic.redis.stub.RedisStub;
 import io.specmatic.stub.ContractStub;
 import io.specmatic.test.SpecmaticContractTest;
@@ -22,6 +23,7 @@ public class ContractTests implements SpecmaticContractTest {
 
     @BeforeAll
     public static void setUp() {
+        System.out.println("Using specmatic redis " + VersionInfo.INSTANCE.describe());
         System.setProperty("host", LOCALHOST);
         System.setProperty("port", APP_PORT);
         System.setProperty("endpointsAPI", "http://localhost:8080/actuator/mappings");

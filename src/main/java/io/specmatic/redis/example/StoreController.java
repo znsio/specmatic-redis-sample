@@ -19,22 +19,22 @@ public class StoreController {
     }
 
     @GetMapping("/stores/{id}/description")
-    public String getStoreDescription(@PathVariable String id) {
+    public String getStoreDescription(@PathVariable(name = "id") String id) {
         return storeService.getStoreDescription(id);
     }
 
     @PostMapping("/stores/{id}/products")
-    public HttpEntity<Long> addProductsToStore(@PathVariable String id, @RequestBody String productName) {
+    public HttpEntity<Long> addProductsToStore(@PathVariable(name = "id") String id, @RequestBody String productName) {
         return new ResponseEntity<>(storeService.addProductsToStore(productName, id), HttpStatus.CREATED);
     }
 
     @GetMapping("/stores/{id}/products")
-    public List<String> getProduct(@PathVariable Long id, @RequestParam String key) {
+    public List<String> getProduct(@PathVariable(name = "id") Long id, @RequestParam String key) {
         return storeService.findMatchingProducts(id, key);
     }
 
     @GetMapping("/stores/{store_id}/products/{id}/description")
-    public String getProductDescription(@PathVariable(name="store_id") String storeId, @PathVariable(name="id") String productId) {
+    public String getProductDescription(@PathVariable(name = "store_id") String storeId, @PathVariable(name = "id") String productId) {
         return storeService.getProductDescription(storeId, productId);
     }
 }

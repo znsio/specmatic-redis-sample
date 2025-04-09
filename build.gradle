@@ -1,44 +1,28 @@
 plugins {
-    id 'java-library'
-    id 'maven-publish'
+    id 'java'
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven {
-//        url = file('<path to Specmatic Redis extracted repo>/repo')
-        url -> throw new GradleException("Please set the URL of the local repository as shown in the line above")
+        url = file('lib').toURI()
     }
+    mavenLocal()
 }
 
 dependencies {
-    api libs.org.springframework.boot.spring.boot.starter.data.redis
-    api libs.org.springframework.boot.spring.boot.starter.web
-    api libs.org.springframework.boot.spring.boot.starter.actuator
-    testImplementation libs.org.springframework.boot.spring.boot.starter.test
-    testImplementation "io.specmatic:junit5-support:2.7.2"
-    testImplementation "io.specmatic.redis:specmatic-redis-obfuscated-original:0.9.3-SNAPSHOT"
-}
+    implementation "org.springframework.boot:spring-boot-starter-data-redis:3.4.4"
+    implementation "org.springframework.boot:spring-boot-starter-web:3.4.4"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:3.4.4"
+    implementation("ch.qos.logback:logback-classic:1.5.18")
 
-group = 'io.specmatic'
-version = '0.0.1-SNAPSHOT'
-description = 'Redis Stub Sample'
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
+    testImplementation "org.springframework.boot:spring-boot-starter-test:3.4.4"
+    testImplementation "io.specmatic:junit5-support:${specmaticVersion}"
+    testImplementation "io.specmatic.redis:specmatic-redis-min:${specmaticRedisVersion}"
 }
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
-tasks.withType(Javadoc) {
-    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
 }
 
 test {
@@ -57,13 +41,5 @@ test {
             println resultLine
             println separator
         }
-    }
-}
-
-configurations {
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-        exclude group: 'ch.qos.logback', module: 'logback-classic'
-        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
     }
 }
